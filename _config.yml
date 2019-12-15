@@ -12,7 +12,7 @@ header_pages:
 
 style: dark
 
-footer: '<a href="https://github.com/janekbaraniewski"><i class="fab fa-github"></i></a>'
+# footer: '<a href="https://github.com/janekbaraniewski"><i class="fab fa-github"></i></a>'
 
 google_analytics: UA-134530203-1
 
