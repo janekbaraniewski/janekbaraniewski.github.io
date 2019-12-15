@@ -5,7 +5,3 @@
 layout: home
 title: baraniewski.com
 ---
-Jan Baraniewski
-dupa
-hehe
-
