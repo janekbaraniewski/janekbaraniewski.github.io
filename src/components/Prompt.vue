@@ -34,7 +34,7 @@ export default defineComponent({
   },
   methods: {
     runCommand (): void {
-      const result = this.handleCommand(this.currentCommand)
+      this.handleCommand(this.currentCommand)
       this.currentCommand = ''
     },
     ...mapActions([
