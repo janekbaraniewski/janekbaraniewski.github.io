@@ -13,6 +13,16 @@ class Projects extends Function {
     return this.bind(this)
   }
 
+  help (): string {
+    return `
+projects cli:
+  help: print this message
+  list: list projects
+  describe: describe project
+  run: run project
+  `
+  }
+
   execute (args: Array<string>): string {
     if (args.length === 0 || args[0] === '') {
       return this.help()
@@ -26,16 +36,6 @@ class Projects extends Function {
         return this.help()
     }
     return args.join(' ')
-  }
-
-  help (): string {
-    return `
-projects cli:
-  help: print this message
-  list: list projects
-  describe: describe project
-  run: run project
-  `
   }
 
   list (): Array<string> {

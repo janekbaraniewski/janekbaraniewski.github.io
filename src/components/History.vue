@@ -26,7 +26,7 @@ export default defineComponent({
         return this.$store.state.history
       },
       set (value: Array<Execution>): void {
-        console.log('ePrr')
+        console.log(value)
       }
     }
   },
