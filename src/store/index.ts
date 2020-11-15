@@ -4,10 +4,10 @@ import { Command, Execution, Projects } from '@/types'
 
 const HELP_MESSAGE = `
 Available commands: 
-  help: print this message
-  history: print command history
-  projects: view and manage projects
-  contact: print contact info
+  help     : prints this message
+  history  : prints command history
+  projects : view and manage projects
+  contact  : prints contact info
 `
 
 const projects = new Projects([])
@@ -58,7 +58,12 @@ export default createStore({
     contact: (store, pc: Command): void => {
       store.commit('execute', {
         command: pc,
-        result: 'contact info TODO'
+        result: ` 
+You can find me on:
+
+- <a href="https://github.com/janekbaraniewski" target="_blank">Github</a>
+`
+
       })
     },
     unknown: (store, pc: Command): void => {
