@@ -1,0 +1,18 @@
+@import 'variables';
+
+body {
+    background-color: $backgroundColor;
+    margin: 0;
+    overflow: auto;
+    height: 100vh;
+    position: relative;
+}
+
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: $outputText;
+  height: 100%;
+  margin: 7px;
+}
