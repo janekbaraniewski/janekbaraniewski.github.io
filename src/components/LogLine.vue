@@ -4,7 +4,7 @@
           <span> {{ prompt }}{{ execution.command.command }} {{ execution.command.args.join(' ') }} </span>
         </div>
         <div class="result">
-          <pre>{{ output }}</pre>
+          <pre :innerHTML="output"></pre>
         </div>
     </div>
 </template>
