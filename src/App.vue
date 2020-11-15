@@ -10,7 +10,7 @@ export default defineComponent({
   name: 'App' as string,
   data () {
     return {
-      prompt: '[guest@baraniewski.com] $' as string
+      prompt: '[guest@baraniewski.com]$ ' as string
     }
   },
   components: {

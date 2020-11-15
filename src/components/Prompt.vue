@@ -64,6 +64,8 @@ export default defineComponent({
     color: $inputText;
     background-color: $backgroundColor;
     border: 0;
+    font-family: monospace;
+    margin: 0;
   }
 
   .prompt input:focus {
