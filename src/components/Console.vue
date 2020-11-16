@@ -1,8 +1,8 @@
 <template>
-<div class="console">
-  <History :prompt="prompt" />
-  <Prompt :prompt="prompt" />
-</div>
+  <div class="console">
+    <History :prompt="prompt" />
+    <Prompt :prompt="prompt" />
+  </div>
 </template>
 
 <script lang="ts">
@@ -17,8 +17,8 @@ export default defineComponent({
     prompt: String
   },
   components: {
-      History,
-      Prompt
+    History,
+    Prompt
   }
 })
 </script>

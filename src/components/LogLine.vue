@@ -1,10 +1,10 @@
 <template>
     <div class="row logline">
         <div class="prompt">
-          <span> {{ prompt }} {{ execution.command.command }} {{ execution.command.args.join(' ') }} </span>
+          <span> {{ prompt }}{{ execution.command.command }} {{ execution.command.args.join(' ') }} </span>
         </div>
         <div class="result">
-          <pre>{{ output }}</pre>
+          <pre :innerHTML="output"></pre>
         </div>
     </div>
 </template>
