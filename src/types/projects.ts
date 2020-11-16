@@ -56,11 +56,10 @@ projects open ` + project.name
   }
 
   open (args: Array<string>): string {
-    var project = this.projectsList.filter(x => x.name === args.join(' '))[0]
-    window.open(project.url, "_blank")
+    const project = this.projectsList.filter(x => x.name === args.join(' '))[0]
+    window.open(project.url, '_blank')
     return 'Opening ' + project.url
   }
-
 }
 
 export {
