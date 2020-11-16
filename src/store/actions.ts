@@ -57,7 +57,11 @@ You can find me on:
       command: pc,
       result: store.state.history.map(
         x => x.command.command + ' ' + x.command.args.join(' ')
-      ).concat([pc.command + ' ' + pc.args.join(' ')]).join('\n')
+      ).filter(
+        x => x.trim().length > 0
+      ).concat(
+        [pc.command + ' ' + pc.args.join(' ')]
+      ).join('\n')
     })
   },
   updateCommandFromHistory: (store: Store): void => {
