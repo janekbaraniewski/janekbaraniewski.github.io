@@ -1,4 +1,4 @@
-import { Command, Execution, Projects, Store } from '@/types'
+import { Command, Execution, Store } from '@/types'
 
 const HELP_MESSAGE = `
 Available commands: 
@@ -7,8 +7,6 @@ Available commands:
   projects : view and manage projects
   contact  : prints contact info
 `
-
-const projects = new Projects([])
 
 export default {
   handleCommand: (store: Store, command: string): void => {
@@ -35,7 +33,7 @@ export default {
   projects: (store: Store, pc: Command): void => {
     store.commit('execute', {
       command: pc,
-      result: projects(pc.args)
+      result: store.state.projectsCLI(pc.args)
     })
   },
   contact: (store: Store, pc: Command): void => {
@@ -63,7 +61,7 @@ You can find me on:
     })
   },
   updateCommandFromHistory: (store: Store): void => {
-    var newCommand: string
+    let newCommand: string
     if (store.state.historyIndex >= store.state.history.length) {
       newCommand = ''
     } else {

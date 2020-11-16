@@ -16,11 +16,11 @@ class Projects extends Function {
   help (): string {
     return `
 projects cli:
-  help: print this message
-  list: list projects
-  describe: describe project
-  run: run project
-  `
+  help     : print this message
+  list     : list projects
+  describe : describe project
+  open     : open project 
+`
   }
 
   execute (args: Array<string>): string {
@@ -34,6 +34,8 @@ projects cli:
         return this.describe(args.slice(1))
       case 'help':
         return this.help()
+      case 'open':
+        return this.open(args.slice(1))
     }
     return args.join(' ')
   }
@@ -42,11 +44,23 @@ projects cli:
     return this.projectsList.map(x => x.name)
   }
 
-  describe (args: Array<string>) {
+  describe (args: Array<string>): string {
     if (args.length === 0 || args[0] === '') { return 'Provide project name' }
-    if (!this.projectsList.map(x => x.name).includes(args[0])) { return 'Project not found' }
-    return this.projectsList.filter(x => x.name === args[0])[0].description
+    if (!this.projectsList.map(x => x.name).includes(args.join(' '))) { return 'Project not found' }
+    const project = this.projectsList.filter(x => x.name === args.join(' '))[0]
+    return project.description + `
+
+If you want to open this project site run
+
+projects open ` + project.name
   }
+
+  open (args: Array<string>): string {
+    var project = this.projectsList.filter(x => x.name === args.join(' '))[0]
+    window.open(project.url, "_blank")
+    return 'Opening ' + project.url
+  }
+
 }
 
 export {

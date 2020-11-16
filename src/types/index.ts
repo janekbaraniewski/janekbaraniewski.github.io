@@ -1,4 +1,4 @@
-import { Projects } from './projects'
+import { Projects, Project } from './projects'
 
 interface Store {
   state: State;
@@ -11,6 +11,7 @@ interface State {
   currentCommand: string;
   history: Array<Execution>;
   historyIndex: number;
+  projectsCLI: Projects;
 }
 
 interface Command {
@@ -31,6 +32,7 @@ export {
   Command,
   Execution,
   KeyEvent,
+  Project,
   Projects,
   Store,
   State
