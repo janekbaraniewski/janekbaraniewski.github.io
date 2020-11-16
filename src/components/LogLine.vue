@@ -45,6 +45,7 @@ export default defineComponent({
       width: 100%;
       text-align: left;
       margin: 0;
+      margin-top: 7px;
     }
     .result {
       margin-bottom: 7px;
