@@ -16,3 +16,16 @@ body {
   height: 100%;
   margin: 7px;
 }
+
+a {
+  color: $linkText;
+}
+
+a:active {
+    color: blue;
+}
+
+a[tabindex]:focus {
+    color:blue;
+    outline: none;
+}
