@@ -2,7 +2,7 @@
 <div class="prompt">
 <form v-on:submit.prevent="runCommand">
   <div class="input-group">
-    <span clas="input-group-addon">{{ prompt }}</span>
+    <span clas="input-group-addon prompt-text">{{ prompt }}</span>
     <input v-model="currentCommand" type="text" name="input" ref="prompt" autocomplete="off" />
   </div>
 </form>
@@ -66,9 +66,12 @@ export default defineComponent({
     border: 0;
     font-family: monospace;
     margin: 0;
+    width: 60%;
   }
-
   .prompt input:focus {
     outline: none;
+  }
+  .input-group {
+    width: 100%;
   }
 </style>
