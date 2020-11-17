@@ -81,5 +81,9 @@ You can find me on:
   historyFuture: (store: Store): void => {
     store.commit('indexFuture')
     store.dispatch('updateCommandFromHistory')
+  },
+  scrollToConsoleBottom: (store: Store): void => {
+    const container = document.querySelector('.console') as HTMLElement
+    window.scrollTo(0, container.scrollHeight)
   }
 }

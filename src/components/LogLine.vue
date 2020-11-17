@@ -11,6 +11,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { mapActions } from 'vuex'
 
 export default defineComponent({
   name: 'LogLine' as string,
@@ -25,6 +26,9 @@ export default defineComponent({
     execution: null
   },
   methods: {
+    ...mapActions([
+      'scrollToConsoleBottom'
+    ]),
     rewriteLetter () {
       this.output += this.outputBuffer[0]
       this.outputBuffer = this.outputBuffer.slice(1)
@@ -36,6 +40,9 @@ export default defineComponent({
   mounted () {
     this.outputBuffer = this.execution.result
     this.rewriteLetter()
+  },
+  updated () {
+    this.scrollToConsoleBottom()
   }
 })
 </script>

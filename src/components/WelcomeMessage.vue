@@ -6,6 +6,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { mapActions } from 'vuex'
+
 export default defineComponent({
   name: 'WelcomeMessage' as string,
   data () {
@@ -27,6 +29,9 @@ For help run 'help'
     }
   },
   methods: {
+    ...mapActions([
+      'scrollToConsoleBottom'
+    ]),
     rewriteMessage () {
       this.message += this.messageBuffer[0]
       this.messageBuffer = this.messageBuffer.slice(1)
@@ -37,6 +42,9 @@ For help run 'help'
   },
   mounted () {
     this.rewriteMessage()
+  },
+  updated () {
+    this.scrollToConsoleBottom()
   }
 })
 </script>

@@ -3,7 +3,7 @@
 <form v-on:submit.prevent="runCommand">
   <div class="input-group">
     <span clas="input-group-addon prompt-text">{{ prompt }}</span>
-    <input v-model="currentCommand" type="text" name="input" ref="prompt" autocomplete="off" />
+    <input v-model="currentCommand" type="text" name="input" ref="prompt" autocomplete="off" autofocus />
   </div>
 </form>
 </div>
