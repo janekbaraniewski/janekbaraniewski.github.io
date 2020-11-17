@@ -4,9 +4,17 @@ export default {
   name: 'baraniewski.com',
   shortDescription: 'This site',
   description: `
+                        baraniewski.com
+                        ---------------
 
-This page is created using VueJS and running on Github Pages.
-
+This site. Nothing more, nothing less.
+You can see full code in project repo.
 `,
-  url: 'https://github.com/janekbaraniewski/janekbaraniewski.github.io'
+  url: 'https://github.com/janekbaraniewski/janekbaraniewski.github.io',
+  technologies: [
+    'VueJS',
+    'Typescript',
+    'Sass',
+    'Github Pages'
+  ]
 } as Project

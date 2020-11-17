@@ -3,6 +3,7 @@ interface Project {
   shortDescription: string;
   description: string;
   url: string;
+  technologies: Array<string>;
 }
 
 class Projects extends Function {
@@ -57,10 +58,12 @@ projects cli:
     const project = this.projectsList.filter(x => x.name === args.join(' ').trim())[0]
     return project.description + `
 
-If you want to open this project site run
+Some technologies used include:
+  ` + project.technologies.join('\n  ') + `
 
-projects open ` + project.name + `
+If you want to open this project site run:
 
+  projects open ` + project.name + `
 
 `
   }
