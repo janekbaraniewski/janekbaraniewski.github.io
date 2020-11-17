@@ -1,9 +1,20 @@
 import { Project } from '@/types'
 
 export default {
-  name: 'this-site',
+  name: 'baraniewski.com',
+  shortDescription: 'This site',
   description: `
-This page is created using VueJS, and running on Github Pages.
+                        baraniewski.com
+                        ---------------
+
+This site. Nothing more, nothing less.
+You can see full code in project repo.
 `,
-  url: 'https://github.com/janekbaraniewski/janekbaraniewski.github.io'
+  url: 'https://github.com/janekbaraniewski/janekbaraniewski.github.io',
+  technologies: [
+    'VueJS',
+    'Typescript',
+    'Sass',
+    'Github Pages'
+  ]
 } as Project

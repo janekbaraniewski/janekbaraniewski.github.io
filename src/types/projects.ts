@@ -1,7 +1,9 @@
 interface Project {
   name: string;
+  shortDescription: string;
   description: string;
   url: string;
+  technologies: Array<string>;
 }
 
 class Projects extends Function {
@@ -29,7 +31,7 @@ projects cli:
     }
     switch (args[0]) {
       case 'list':
-        return this.list().join(' ')
+        return this.list()
       case 'describe':
         return this.describe(args.slice(1))
       case 'help':
@@ -40,23 +42,36 @@ projects cli:
     return args.join(' ')
   }
 
-  list (): Array<string> {
-    return this.projectsList.map(x => x.name)
+  list (): string {
+    const result = [] as Array<string>
+    const nameBufferSize = Math.max(...this.projectsList.map(x => x.name.length)) + 1
+    result.push('<b>Name</b>' + ' '.repeat(nameBufferSize - 4) + '<b>Info</b>')
+    for (const project of this.projectsList) {
+      result.push(project.name + ' '.repeat(nameBufferSize - project.name.length) + project.shortDescription)
+    }
+    return result.join('\n')
   }
 
   describe (args: Array<string>): string {
     if (args.length === 0 || args[0] === '') { return 'Provide project name' }
-    if (!this.projectsList.map(x => x.name).includes(args.join(' '))) { return 'Project not found' }
-    const project = this.projectsList.filter(x => x.name === args.join(' '))[0]
+    if (!this.projectsList.map(x => x.name).includes(args.join(' ').trim())) { return 'Project not found' }
+    const project = this.projectsList.filter(x => x.name === args.join(' ').trim())[0]
     return project.description + `
 
-If you want to open this project site run
+Some technologies used include:
+  ` + project.technologies.join('\n  ') + `
 
-projects open ` + project.name
+If you want to open this project site run:
+
+  projects open ` + project.name + `
+
+`
   }
 
   open (args: Array<string>): string {
-    const project = this.projectsList.filter(x => x.name === args.join(' '))[0]
+    if (args.length === 0 || args[0] === '') { return 'Provide project name' }
+    if (!this.projectsList.map(x => x.name).includes(args.join(' ').trim())) { return 'Project not found' }
+    const project = this.projectsList.filter(x => x.name === args.join(' ').trim())[0]
     window.open(project.url, '_blank')
     return 'Opening ' + project.url
   }
