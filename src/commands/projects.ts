@@ -1,13 +1,13 @@
-import { Command, ParsedCommand, Project, State } from "@/types";
-
+import { Command, ParsedCommand, Project, State } from '@/types'
 
 export default class Projects extends Function implements Command {
-
     projectsList: Array<Project>;
 
     constructor (projectsList: Array<Project>) {
       super('...args', 'return this.execute(...args)')
+      console.log(projectsList)
       this.projectsList = projectsList
+      console.log(this.projectsList)
       return this.bind(this)
     }
 
@@ -22,6 +22,8 @@ export default class Projects extends Function implements Command {
     }
 
     execute (state: State, pc: ParsedCommand): string {
+      console.log(pc)
+      console.log(this.projectsList)
       if (pc.args.length === 0 || pc.args[0] === '') {
         return this.help()
       }

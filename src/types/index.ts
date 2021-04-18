@@ -1,4 +1,10 @@
-import { Project } from './projects'
+interface Project {
+  name: string;
+  shortDescription: string;
+  description: string;
+  url: string;
+  technologies: Array<string>;
+}
 
 interface Store {
   state: State;

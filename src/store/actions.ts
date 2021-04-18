@@ -1,4 +1,4 @@
-import { Command, ParsedCommand, Execution, Store } from '@/types'
+import { Command, ParsedCommand, Execution, Store, KeyEvent } from '@/types'
 
 const HELP_MESSAGE = `
 Available commands:
@@ -30,7 +30,7 @@ export default {
       command: pc,
       result: (
         store.state.commands.get(pc.command) as Command
-        ).execute(store.state, pc),
+      ).execute(store.state, pc)
     })
   },
   help: (store: Store, pc: ParsedCommand): void => {
@@ -54,6 +54,16 @@ export default {
       newCommand = cmd.command + ' ' + cmd.args.join(' ')
     }
     store.commit('setCommand', newCommand)
+  },
+  handleKey (store: Store, e: KeyEvent): void {
+    switch (e.keyCode) {
+      case 38:
+        store.dispatch('historyPast')
+        break
+      case 40:
+        store.dispatch('historyFuture')
+        break
+    }
   },
   historyPast: (store: Store): void => {
     store.commit('indexPast')
