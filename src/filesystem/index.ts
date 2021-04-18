@@ -10,7 +10,9 @@ export default {
         content: [
             {
               name: 'hello.txt',
-              content: 'hello\n'
+              content: `
+hello... ;)\n
+`
             } as File
         ]
       } as Directory
@@ -31,5 +33,17 @@ export default {
       })[0] as unknown as Directory
     })
     return resultDir
+  },
+  setPath: function (path: string): boolean {
+    let newPath = path
+    if (!newPath.startsWith('/')) {
+      newPath = this.pwd + '/' + path
+    }
+    const result = this.getDir(newPath)
+    if (result !== undefined) {
+      this.pwd = newPath
+      return true
+    }
+    return false
   }
 } as Filesystem

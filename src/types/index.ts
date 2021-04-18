@@ -22,6 +22,7 @@ interface Filesystem {
   getCurrentDir (): Directory;
   getDir (path: string): Directory;
   getFromDir (path: string, dir: Directory): Directory;
+  setPath (path: string): boolean;
 }
 
 interface Store {

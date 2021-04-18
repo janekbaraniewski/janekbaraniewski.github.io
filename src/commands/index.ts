@@ -7,6 +7,7 @@ import Projects from './projects'
 import Ls from './ls'
 import Cat from './cat'
 import Pwd from './pwd'
+import Cd from './cd'
 
 export default (): Map<string, Command> => {
   // TODO: commands should register themself automatically
@@ -18,5 +19,6 @@ export default (): Map<string, Command> => {
   availableCommands.set('ls', new Ls())
   availableCommands.set('cat', new Cat())
   availableCommands.set('pwd', new Pwd())
+  availableCommands.set('cd', new Cd())
   return availableCommands
 }
