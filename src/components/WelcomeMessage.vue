@@ -14,16 +14,14 @@ export default defineComponent({
     return {
       message: '' as string,
       messageBuffer: `
-                                                           
- _                   _               _   _                 
-| |_ ___ ___ ___ ___|_|___ _ _ _ ___| |_|_|  ___ ___ _____ 
+
+ _                   _               _   _
+| |_ ___ ___ ___ ___|_|___ _ _ _ ___| |_|_|  ___ ___ _____
 | . | .'|  _| .'|   | | -_| | | |_ -| '_| |_|  _| . |     |
 |___|__,|_| |__,|_|_|_|___|_____|___|_,_|_|_|___|___|_|_|_|
-                                                           
 
-Welcome to baraniewski.com 
 
-For help run 'help'
+Welcome to baraniewski.com
 
 ` as string
     }
