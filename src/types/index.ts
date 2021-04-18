@@ -15,6 +15,7 @@ interface Store {
 interface State {
   commands: Map<string, Command>;
   currentCommand: string;
+  projectsList: Array<Project>;
   history: Array<Execution>;
   historyIndex: number;
 }
@@ -25,7 +26,7 @@ interface ParsedCommand {
 }
 
 interface Command {
-  execute: (state: State,pc: ParsedCommand) => string;
+  execute: (state: State, pc: ParsedCommand) => string;
 }
 
 interface Execution {
@@ -35,6 +36,7 @@ interface Execution {
 
 interface KeyEvent {
   keyCode: number;
+  preventDefault: () => void;
 }
 
 export {

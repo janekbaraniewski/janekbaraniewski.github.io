@@ -1,17 +1,18 @@
 import { createStore } from 'vuex'
 
-import { Command, Execution, State } from '@/types'
+import { Execution, State } from '@/types'
 
 import actions from './actions'
 
-import data from '@/data'
 import loadCommands from '@/commands'
+import data from '@/data'
 
 export default createStore({
   state: {
     currentCommand: '' as string,
     history: [] as Array<Execution>,
-    commands: loadCommands(data.projects),
+    projectsList: data.projects,
+    commands: loadCommands(),
     historyIndex: 0 as number
   } as State,
   mutations: {
