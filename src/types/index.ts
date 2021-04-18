@@ -1,4 +1,10 @@
-import { Projects, Project } from './projects'
+interface Project {
+  name: string;
+  shortDescription: string;
+  description: string;
+  url: string;
+  technologies: Array<string>;
+}
 
 interface Store {
   state: State;
@@ -7,33 +13,38 @@ interface Store {
 }
 
 interface State {
-  availableCommands: Array<string>;
+  commands: Map<string, Command>;
   currentCommand: string;
+  projectsList: Array<Project>;
   history: Array<Execution>;
   historyIndex: number;
-  projectsCLI: Projects;
 }
 
-interface Command {
+interface ParsedCommand {
   command: string;
   args: Array<string>;
 }
 
+interface Command {
+  execute: (state: State, pc: ParsedCommand) => string;
+}
+
 interface Execution {
-  command: Command;
+  command: ParsedCommand;
   result: string;
 }
 
 interface KeyEvent {
   keyCode: number;
+  preventDefault: () => void;
 }
 
 export {
   Command,
   Execution,
   KeyEvent,
+  ParsedCommand,
   Project,
-  Projects,
   Store,
   State
 }
