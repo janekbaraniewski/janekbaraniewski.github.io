@@ -55,6 +55,18 @@ export default {
     }
     store.commit('setCommand', newCommand)
   },
+  autocomplete (store: Store): void {
+    if (store.state.currentCommand.trim() === '') {
+      return
+    }
+
+    [...store.state.commands.keys()].sort().forEach(key => {
+      if (key.startsWith(store.state.currentCommand)) {
+        store.commit('setCommand', key)
+        return
+      }
+    })
+  },
   handleKey (store: Store, e: KeyEvent): void {
     switch (e.keyCode) {
       case 38:
@@ -62,6 +74,10 @@ export default {
         break
       case 40:
         store.dispatch('historyFuture')
+        break
+      case 9:
+        store.dispatch('autocomplete')
+        e.preventDefault()
         break
     }
   },
