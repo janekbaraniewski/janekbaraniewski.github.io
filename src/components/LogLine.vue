@@ -39,7 +39,11 @@ export default defineComponent({
   },
   mounted () {
     this.outputBuffer = this.execution.result
-    this.rewriteLetter()
+    if (this.outputBuffer.length > 0) {
+      this.rewriteLetter()
+    } else {
+      this.output = '\n'
+    }
   },
   updated () {
     this.scrollToConsoleBottom()
