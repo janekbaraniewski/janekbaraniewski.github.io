@@ -1,7 +1,7 @@
-import { Command, Execution, Store } from '@/types'
+import { Command, ParsedCommand, Execution, Store } from '@/types'
 
 const HELP_MESSAGE = `
-Available commands: 
+Available commands:
   help     : prints this message
   history  : prints command history
   projects : view and manage projects
@@ -14,54 +14,35 @@ export default {
     const parsedCommand = {
       command: splited[0],
       args: splited.slice(1)
-    } as Command
-    if (store.state.availableCommands.includes(parsedCommand.command)) {
-      store.dispatch(parsedCommand.command, parsedCommand)
+    } as ParsedCommand
+    if (store.state.commands.has(parsedCommand.command)) {
+      store.dispatch('execute', parsedCommand)
     } else if (parsedCommand.command === '') {
+      // TODO: factor this out
       store.commit('execute', { command: parsedCommand, result: ' ' })
     } else {
       store.dispatch('unknown', parsedCommand)
     }
     store.commit('resetIndex')
   },
-  help: (store: Store, pc: Command): void => {
+  execute: (store: Store, pc: ParsedCommand): void => {
+    store.commit('execute', {
+      command: pc,
+      result: (
+        store.state.commands.get(pc.command) as Command
+        ).execute(store.state, pc),
+    })
+  },
+  help: (store: Store, pc: ParsedCommand): void => {
     store.commit('execute', {
       command: pc,
       result: HELP_MESSAGE
     } as Execution)
   },
-  projects: (store: Store, pc: Command): void => {
-    store.commit('execute', {
-      command: pc,
-      result: store.state.projectsCLI(pc.args)
-    })
-  },
-  contact: (store: Store, pc: Command): void => {
-    store.commit('execute', {
-      command: pc,
-      result: ` 
-You can find me on:
-
-- <a href="https://github.com/janekbaraniewski" target="_blank">Github</a>
-`
-    })
-  },
-  unknown: (store: Store, pc: Command): void => {
+  unknown: (store: Store, pc: ParsedCommand): void => {
     store.commit('execute', {
       command: pc,
       result: store.state.currentCommand + ' : command unkown'
-    })
-  },
-  history: (store: Store, pc: Command): void => {
-    store.commit('execute', {
-      command: pc,
-      result: store.state.history.map(
-        x => x.command.command + ' ' + x.command.args.join(' ')
-      ).filter(
-        x => x.trim().length > 0
-      ).concat(
-        [pc.command + ' ' + pc.args.join(' ')]
-      ).join('\n')
     })
   },
   updateCommandFromHistory: (store: Store): void => {
