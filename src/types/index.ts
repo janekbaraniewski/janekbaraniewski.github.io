@@ -6,6 +6,25 @@ interface Project {
   technologies: Array<string>;
 }
 
+interface File {
+  name: string;
+  content: string;
+}
+
+interface Directory {
+  name: string;
+  content: Array<File | Directory>;
+}
+
+interface Filesystem {
+  pwd: string;
+  root: Directory;
+  getCurrentDir (): Directory;
+  getDir (path: string): Directory;
+  getFromDir (path: string, dir: Directory): Directory;
+  setPath (path: string): boolean;
+}
+
 interface Store {
   state: State;
   dispatch (command: string, args?: any): void;
@@ -16,6 +35,7 @@ interface State {
   commands: Map<string, Command>;
   currentCommand: string;
   projectsList: Array<Project>;
+  filesystem: Filesystem;
   history: Array<Execution>;
   historyIndex: number;
 }
@@ -41,7 +61,10 @@ interface KeyEvent {
 
 export {
   Command,
+  Directory,
   Execution,
+  File,
+  Filesystem,
   KeyEvent,
   ParsedCommand,
   Project,

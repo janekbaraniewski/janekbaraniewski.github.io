@@ -4,6 +4,11 @@ import Compgen from './compgen'
 import Contact from './contact'
 import History from './history'
 import Projects from './projects'
+import Ls from './ls'
+import Cat from './cat'
+import Pwd from './pwd'
+import Cd from './cd'
+import Exit from './exit'
 
 export default (): Map<string, Command> => {
   // TODO: commands should register themself automatically
@@ -12,5 +17,10 @@ export default (): Map<string, Command> => {
   availableCommands.set('contact', new Contact())
   availableCommands.set('projects', new Projects())
   availableCommands.set('compgen', new Compgen())
+  availableCommands.set('ls', new Ls())
+  availableCommands.set('cat', new Cat())
+  availableCommands.set('pwd', new Pwd())
+  availableCommands.set('cd', new Cd())
+  availableCommands.set('exit', new Exit())
   return availableCommands
 }

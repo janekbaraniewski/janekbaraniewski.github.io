@@ -6,10 +6,12 @@ import actions from './actions'
 
 import loadCommands from '@/commands'
 import data from '@/data'
+import filesystem from '@/filesystem'
 
 export default createStore({
   state: {
     currentCommand: '' as string,
+    filesystem: filesystem,
     history: [] as Array<Execution>,
     projectsList: data.projects,
     commands: loadCommands(),
