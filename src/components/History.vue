@@ -25,9 +25,7 @@ export default defineComponent({
       get (): Array<Execution> {
         return this.$store.state.history
       },
-      set (value: Array<Execution>): void {
-        console.log(value)
-      }
+      set (value: Array<Execution>): void {}
     }
   },
   components: {
