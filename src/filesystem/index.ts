@@ -1,7 +1,15 @@
-import { Directory, File, Filesystem } from '@/types'
+import { Directory, File, Filesystem, Content } from '@/types'
+
+const stringWithoutSuffix = (word: string, suffix: string): string =>
+  word.endsWith(suffix) && word.length > suffix.length
+    ? word.substring(0, word.length - suffix.length) : word
+
+const withoutSlash = (word: string): string =>
+  stringWithoutSuffix(word, '/')
 
 export default {
   pwd: '/home',
+  home: '/home',
   root: {
     name: '/',
     content: [
@@ -14,15 +22,14 @@ export default {
 hello... ;)\n
 `
             } as File
-        ]
+        ] as Content
       } as Directory
-    ]
+    ] as Content
   } as Directory,
   getCurrentDir: function (): Directory {
     return this.getDir(this.pwd)
   },
   getDir: function (path: string): Directory {
-    console.log(path)
     return this.getFromDir(path, this.root)
   },
   getFromDir: function (path: string, dir: Directory): Directory {
@@ -35,15 +42,76 @@ hello... ;)\n
     return resultDir
   },
   setPath: function (path: string): boolean {
-    let newPath = path
-    if (!newPath.startsWith('/')) {
-      newPath = this.pwd + '/' + path
-    }
+    const newPath = this.normalizePath(path)
     const result = this.getDir(newPath)
     if (result !== undefined) {
       this.pwd = newPath
       return true
     }
     return false
+  },
+  expandParentDir: function (path: string, parent: string): string {
+    if (path.length === 0) {
+      return parent
+    }
+    const countUp = (path.match(/\.\.\//g) || []).length
+    if (countUp === 0) {
+      return withoutSlash(parent + '/' + path)
+    }
+    const newParent = parent.split('/').slice(0, -countUp < parent.split('/').length - 1 ? -countUp : 0).join('/')
+    path = withoutSlash(path.replaceAll('../', ''))
+    return path.length > 0 ? newParent + '/' + path : newParent
+  },
+  handleParentDir: function (path: string): string {
+    if (!path.includes('../')) {
+      return path
+    }
+
+    let root = this.pwd
+
+    if (path.startsWith('/')) {
+      root = this.root.name
+      path = path.substring(1)
+    }
+
+    (path.match(/(\.\.\/)*[a-zA-Z0-9!-)/]*\/?/g) || [])
+      .filter(element => element.length > 0)
+      .forEach(element => {
+        root = this.expandParentDir(element, root)
+        if (root.length === 0) {
+          root = '/'
+        }
+      })
+    return root
+  },
+  normalizePath: function (path: string): string {
+    if (path.startsWith('~')) path = path.replace('~', this.home)
+
+    const newPath = this.handleParentDir(path)
+
+    if (newPath.startsWith('/')) return withoutSlash(newPath)
+
+    if (this.pwd === '/') return withoutSlash(this.pwd + newPath)
+
+    return withoutSlash(this.pwd + '/' + newPath)
+  },
+  addDir: function (path: string, name: string): boolean {
+    path = this.normalizePath(path)
+    function getDirContent (content: Content, indexes: string[]): Content {
+      if (indexes.length === 0) {
+        return content
+      }
+      const currentDir = content.filter(x => x.name === indexes[0])[0] as Directory
+      return getDirContent(currentDir.content, indexes.slice(1))
+    }
+
+    getDirContent(this.root.content, path.split('/')
+      .filter(x => x.length > 0))
+      .push({
+        name: name,
+        content: []
+      } as Directory)
+
+    return true
   }
 } as Filesystem

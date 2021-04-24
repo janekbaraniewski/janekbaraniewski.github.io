@@ -8,7 +8,6 @@ export default class Ls extends Function implements Command {
 
   execute (state: State, pc: ParsedCommand): string {
     let directory = state.filesystem.getCurrentDir()
-    console.log(directory)
     if (pc.args.length > 0) {
       if (pc.args[0].startsWith('/')) {
         directory = state.filesystem.getDir(pc.args[0])

@@ -7,7 +7,7 @@ export default class Cd extends Function implements Command {
   }
 
   execute (state: State, pc: ParsedCommand): string {
-    if (pc.args.length === 1) {
+    if (pc.args.length === 1 && pc.args[0].trim().length > 0) {
       if (!state.filesystem.setPath(pc.args[0])) {
         return 'path not found'
       }

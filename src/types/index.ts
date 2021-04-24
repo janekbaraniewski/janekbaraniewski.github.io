@@ -1,3 +1,6 @@
+
+type Content = Array<File | Directory>;
+
 interface Project {
   name: string;
   shortDescription: string;
@@ -13,16 +16,21 @@ interface File {
 
 interface Directory {
   name: string;
-  content: Array<File | Directory>;
+  content: Content;
 }
 
 interface Filesystem {
   pwd: string;
+  home: string;
   root: Directory;
   getCurrentDir (): Directory;
   getDir (path: string): Directory;
   getFromDir (path: string, dir: Directory): Directory;
   setPath (path: string): boolean;
+  expandParentDir (path: string, parent: string): string;
+  handleParentDir (path: string): string;
+  normalizePath (path: string): string;
+  addDir (path: string, name: string): boolean;
 }
 
 interface Store {
@@ -61,6 +69,7 @@ interface KeyEvent {
 
 export {
   Command,
+  Content,
   Directory,
   Execution,
   File,
