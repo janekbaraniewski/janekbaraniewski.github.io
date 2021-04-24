@@ -9,6 +9,7 @@ import Cat from './cat'
 import Pwd from './pwd'
 import Cd from './cd'
 import Exit from './exit'
+import Mkdir from './mkdir'
 
 export default (): Map<string, Command> => {
   // TODO: commands should register themself automatically
@@ -22,5 +23,6 @@ export default (): Map<string, Command> => {
   availableCommands.set('pwd', new Pwd())
   availableCommands.set('cd', new Cd())
   availableCommands.set('exit', new Exit())
+  availableCommands.set('mkdir', new Mkdir())
   return availableCommands
 }

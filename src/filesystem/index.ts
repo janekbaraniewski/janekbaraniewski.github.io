@@ -94,5 +94,24 @@ hello... ;)\n
     if (this.pwd === '/') return withoutSlash(this.pwd + newPath)
 
     return withoutSlash(this.pwd + '/' + newPath)
+  },
+  addDir: function (path: string, name: string): boolean {
+    path = this.normalizePath(path)
+    function getDirContent (content: Content, indexes: string[]): Content {
+      if (indexes.length === 0) {
+        return content
+      }
+      const currentDir = content.filter(x => x.name === indexes[0])[0] as Directory
+      return getDirContent(currentDir.content, indexes.slice(1))
+    }
+
+    getDirContent(this.root.content, path.split('/')
+      .filter(x => x.length > 0))
+      .push({
+        name: name,
+        content: []
+      } as Directory)
+
+    return true
   }
 } as Filesystem
