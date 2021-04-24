@@ -1,4 +1,4 @@
-import { Directory, File, Filesystem } from '@/types'
+import { Directory, File, Filesystem, Content } from '@/types'
 
 const stringWithoutSuffix = (word: string, suffix: string): string =>
   word.endsWith(suffix) && word.length > suffix.length
@@ -22,9 +22,9 @@ export default {
 hello... ;)\n
 `
             } as File
-        ]
+        ] as Content
       } as Directory
-    ]
+    ] as Content
   } as Directory,
   getCurrentDir: function (): Directory {
     return this.getDir(this.pwd)
