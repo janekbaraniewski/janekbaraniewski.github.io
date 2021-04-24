@@ -18,11 +18,15 @@ interface Directory {
 
 interface Filesystem {
   pwd: string;
+  home: string;
   root: Directory;
   getCurrentDir (): Directory;
   getDir (path: string): Directory;
   getFromDir (path: string, dir: Directory): Directory;
   setPath (path: string): boolean;
+  expandParentDir (path: string, parent: string): string;
+  handleParentDir (path: string): string;
+  normalizePath (path: string): string;
 }
 
 interface Store {
