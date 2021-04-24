@@ -10,6 +10,7 @@ import Pwd from './pwd'
 import Cd from './cd'
 import Exit from './exit'
 import Mkdir from './mkdir'
+import Echo from './echo'
 
 export default (): Map<string, Command> => {
   // TODO: commands should register themself automatically
@@ -24,5 +25,6 @@ export default (): Map<string, Command> => {
   availableCommands.set('cd', new Cd())
   availableCommands.set('exit', new Exit())
   availableCommands.set('mkdir', new Mkdir())
+  availableCommands.set('echo', new Echo())
   return availableCommands
 }
